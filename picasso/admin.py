@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import MetaData, Image
 
-# Register your models here.
+admin.site.register(MetaData)
+admin.site.register(Image)

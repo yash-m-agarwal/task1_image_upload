@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for data in datas %}
+        <div class="my-4">
+            {{ data.title }}
+            {{ data.description }}
+            {% for image in data.images.all %}
+                <a href="{{ image.image.url }}"><img style="height: 200px; width: 300px" src="{{ image.image.url }}" alt="Images"></a>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

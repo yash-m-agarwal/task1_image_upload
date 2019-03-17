@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Image{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>{{ data.title }}</h1>
+        <h3>{{ data.description }}</h3>
+        {% for image in data.images.all %}
+            <a href="{{ image.image.url }}">
+                <img src="{{ image.image.url }}" style="height: 200px; width: 300px" alt="Image">
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
