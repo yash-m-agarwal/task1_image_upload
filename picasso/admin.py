@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MetaData, Image
+from .models import Data, Image
 
-admin.site.register(MetaData)
+admin.site.register(Data)
 admin.site.register(Image)

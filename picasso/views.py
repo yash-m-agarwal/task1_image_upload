@@ -1,18 +1,18 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from .models import MetaData, Image
+from .models import Data, Image
 
 def home(request):
-    datas = MetaData.objects.all()
-    return render(request, 'home.html', {'datas': datas})
+    data = Data.objects.all()
+    return render(request, 'home.html', {'data': data})
 
 
 def image_view(request, pk):
     try:
-        data = MetaData.objects.get(pk=pk)
-    except MetaData.DoesNotExist:
+        datum = Data.objects.get(pk=pk)
+    except Data.DoesNotExist:
         raise Http404
-    return render(request, 'image_view.html', {'data': data})
+    return render(request, 'image_view.html', {'datum': datum})
 
 
 def new_upload(request):
@@ -21,17 +21,18 @@ def new_upload(request):
         description = request.POST['description']
         images = request.FILES.getlist('images')
 
-        data = MetaData.objects.create(
+        datum = Data.objects.create(
             title=title,
-            description=description
+            description=description,
+            image_flagship=images[0]
         )
 
         for image in images:
             Image.objects.create(
                 image=image,
-                metadata=data
+                data=datum
             )
 
-        return redirect('image_view', pk=data.pk)
+        return redirect('image_view', pk=datum.pk)
 
     return render(request, 'new_upload.html', )

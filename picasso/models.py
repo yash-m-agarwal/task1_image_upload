@@ -1,8 +1,9 @@
 from django.db import models
 
-class MetaData(models.Model):
+class Data(models.Model):
     title = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=255, null=False)
+    image_flagship = models.ImageField(upload_to='images/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -10,4 +11,4 @@ class MetaData(models.Model):
 
 class Image(models.Model):
     image = models.ImageField(upload_to='images/')
-    metadata = models.ForeignKey(MetaData, related_name='images')
+    data = models.ForeignKey(Data, related_name='images', null=True)

@@ -3,13 +3,24 @@
 {% block title %}Image{% endblock %}
 
 {% block content %}
-    <div>
-        <h1>{{ data.title }}</h1>
-        <h3>{{ data.description }}</h3>
-        {% for image in data.images.all %}
-            <a href="{{ image.image.url }}">
-                <img src="{{ image.image.url }}" style="height: 200px; width: 300px" alt="Image">
-            </a>
-        {% endfor %}
+    <div class="my-4">
+        <h1 class="text-center">{{ datum.title }}</h1>
+        <h4>{{ datum.description }}</h4>
+        <div class="justify-content-center">
+            {% for image in datum.images.all %}
+                <a href="{{ image.image.url }}">
+                    <img src="{{ image.image.url }}" style="height: 200px; width: 300px" alt="Image">
+                </a>
+            {% endfor %}
+        </div>
+        <a href="{% url 'new_upload' %}">
+            <div class="butn">
+                <svg width="26" height="25" baseProfile="full" viewBox="0 0 26 25" class="symbol icon add">
+                    <path d="M12.99 0C6.189 0 .51 5.678.51 12.479.51 19.28 6.189 25 12.99 25c6.8 0 12.5-5.699 12.5-12.5S19.79 0 12.99 0zm6.676 14h-5v5h-3v-5h-5v-3h5V6h3v5h5v3z">
+                    </path>
+                </svg>
+                <span class="text">Add Image</span>
+            </div>
+        </a>
     </div>
 {% endblock %}
