@@ -22,14 +22,20 @@
                         <th>Added Images</th>
                     </tr>
                 </thead>
-                <tbody style="color: #117a8b">
+                <tbody style="color: #007bff">
                 </tbody>
             </table>
             <div class="form-group">
-                <label for="id_image">Add image to upload</label>
-                <input type="file" class="form-group" id="id_image" name="images" multiple>
+                <div class="butn" style="width: 40px; display: inline; background-color: #ffffff">
+                    <svg width="26" height="25" baseProfile="full" viewBox="0 0 26 25" class="symbol icon add">
+                        <path d="M12.99 0C6.189 0 .51 5.678.51 12.479.51 19.28 6.189 25 12.99 25c6.8 0 12.5-5.699 12.5-12.5S19.79 0 12.99 0zm6.676 14h-5v5h-3v-5h-5v-3h5V6h3v5h5v3z">
+                        </path>
+                    </svg>
+                </div>
+                <span style="font-size: 20px;">Click on add button to upload images</span>
+                <input type="file" style="display: none;" class="form-group" id="id_image" name="images" multiple>
             </div>
-            <button type="submit" class="btn btn-success" id="submitBtn">Upload</button>
+            <button type="submit" class="btn btn-success" id="submitBtn">Create</button>
         </form>
     </div>
 
@@ -37,72 +43,6 @@
 
 {% block javascript %}
 
-    {# JQUERY FILE UPLOAD SCRIPTS #}
-    <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
-    <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
-    <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'js/new_upload.js' %}" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        //Function to get csrf_token via cookie
-
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                let cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    let cookie = jQuery.trim(cookies[i]);
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        let frm = $('#submit_image');
-
-        let formData = new FormData();
-
-        let reader = new FileReader();
-
-        $('#id_image').on('input', function () {
-            let ins = document.getElementById('id_image').files.length;
-            for (let x = 0; x < ins; x++) {
-                formData.append("images[]", document.getElementById('id_image').files[x]);
-            }
-            $("#gallery tbody").prepend(
-              "<tr><td>" + document.getElementById('id_image').files[0].name + "</td></tr>"
-            );
-            console.log($(this)[0].files[0]);
-        });
-
-        frm.submit( function() {
-
-            let csrftoken = getCookie('csrftoken');
-            let title = $('#id_title').val();
-            let description = $('#id_description').val();
-            //let images = $('#id_image')[0].files;
-            let str = title + '  ' + description;
-
-            alert(str);
-            formData.append('title',title);
-            formData.append('description',description);
-            formData.append('csrfmiddlewaretoken', csrftoken);
-
-            $.ajax({
-                type: 'post',
-                url: '/image/new/',
-                contentType: false,
-                processData:false,
-                data: formData,
-                success: function (data) {
-                    alert(data);
-                },
-                error: function (err) {
-                    alert("Something went wrong!!" + err);
-                }
-            });
-        });
-    </script>
 {% endblock %}

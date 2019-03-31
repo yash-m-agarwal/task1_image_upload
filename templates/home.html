@@ -1,26 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     {% for datum in data %}
-        <div class="my-4">
-            {{ datum.title }}
-            {{ datum.description }}
-            <a href="{{ datum.image_flagship.url }}"><img style="height: 200px; width: 300px" src="{{ datum.image_flagship.url }}" alt="Image"></a>
-            <a href="{% url 'image_view' datum.pk %}">All images</a>
+        <div class="card">
+            <a href="{{ datum.image_flagship.url }}"><img class="card-img-top" src="{{ datum.image_flagship.url }}" alt="Image"></a>
+            <div class="card-body">
+                <h5 class="card-title">{{ datum.title }}</h5>
+                <p class="card-text">{{ datum.description }}</p>
+                <a href="{% url 'image_view' datum.pk %}">View all images</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ datum.uploaded_at }}</small>
+            </div>
         </div>
     {% endfor %}
-    <!--<a href="{# {% url 'new_upload' %} #}">
-        <div class="butn">
-            <svg width="26" height="25" baseProfile="full" viewBox="0 0 26 25" class="symbol icon add">
-                <path d="M12.99 0C6.189 0 .51 5.678.51 12.479.51 19.28 6.189 25 12.99 25c6.8 0 12.5-5.699 12.5-12.5S19.79 0 12.99 0zm6.676 14h-5v5h-3v-5h-5v-3h5V6h3v5h5v3z">
-                </path>
-            </svg>
-            <span class="text">Add Image</span>
-        </div>
-    </a>-->
+
     <a href="{% url 'new_upload' %}">
-        <button type="button" class="btn btn-primary js-upload-photos">
-            <span class="glyphicon glyphicon-cloud-upload"></span> Upload Photos
+        <button type="button" class="btn btn-primary my-4">
+            <span class="glyphicon glyphicon-cloud-upload"></span> Upload Image
         </button>
     </a>
 

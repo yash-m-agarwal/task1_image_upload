@@ -29,12 +29,6 @@ def new_upload(request):
         description = request.POST.get('description')
         images = request.FILES.getlist('images[]')
 
-        print(title)
-        print(description)
-        print(type(images))
-        for img in images:
-            print(img)
-
         datum = Data.objects.create(
              title=title,
              description=description,
