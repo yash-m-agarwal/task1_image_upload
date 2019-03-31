@@ -45,6 +45,8 @@ function getCookie(name)
         formData.append('description',description);
         formData.append('csrfmiddlewaretoken', csrftoken);
 
+        alert("Images uploaded Successfully");
+
         $.ajax({
             type: 'post',
             url: '/image/new/',
